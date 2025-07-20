@@ -27,18 +27,18 @@
   "lint-staged:options": {
     "allowEmpty": true
   },
-  "keywords": [],
+  "keywords": ["git","cli","autocommit","ai-powered-tool"],
   "author": "JorgeRosbel",
   "license": "ISC",
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JorgeRosbel/-------------"
+    "url": "git+https://github.com/JorgeRosbel/autocommit-cli"
   },
   "bugs": {
-    "url": "https://github.com/JorgeRosbel/------/issues"
+    "url": "https://github.com/JorgeRosbel/autocommit-cli/issues"
   },
-  "homepage": "https://github.com/JorgeRosbel/--------#readme",
+  "homepage": "https://github.com/JorgeRosbel/autocommit-cli#readme",
   "devDependencies": {
     "@types/figlet": "^1.7.0",
     "@types/inquirer": "^9.0.8",

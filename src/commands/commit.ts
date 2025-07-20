@@ -26,7 +26,7 @@ const gitCommit = async (message: string) => {
 };
 
 const gitCommitScript = (message: string) => {
-  execFile('git', ['commit', '-m', message], (error, stdout, stderr) => {
+  execFile('git', ['commit', '-m', message], (error, _, stderr) => {
     if (error) {
       console.error('❌ Error ejecutando git commit:', error.message);
       process.exit(1);
@@ -37,18 +37,45 @@ const gitCommitScript = (message: string) => {
   });
 };
 
+// const gitDiffScript = (): Promise<string> => {
+
+//   const cm = `git diff --cached --unified=0 "$@" | grep -E '^[+-]' | grep -Ev '^(---|\+\+\+)'`
+
+//   return new Promise((resolve, reject) => {
+//     execFile('sh', ['-c',cm], (error, stdout, stderr) => {
+//       if (error) {
+//         process.exit(1);
+//         //   return reject(new Error(`Error executing script: ${error.message}`));
+//       }
+//       if (stderr) {
+//         return reject(new Error(`Script stderr: ${stderr}`));
+//       }
+//       resolve(stdout);
+//     });
+//   });
+// };
+
 const gitDiffScript = (): Promise<string> => {
-  const script = join(process.cwd(), 'src/utils/git_diff.sh');
+  const gitDiffCommand = "git diff --cached --unified=0 | grep -E '^[+-][^+-]' || true";
 
   return new Promise((resolve, reject) => {
-    execFile('sh', [script], (error, stdout, stderr) => {
+    execFile('sh', ['-c', gitDiffCommand], (error, stdout, stderr) => {
       if (error) {
-        process.exit(1);
-        //   return reject(new Error(`Error executing script: ${error.message}`));
+        // If there are no staged changes, git diff returns exit code 1
+        if (error.code === 1 && !stdout && !stderr) {
+          return reject(new Error('No staged changes to commit'));
+        }
+        return reject(new Error(`Error executing git diff: ${error.message}`));
       }
+
       if (stderr) {
-        return reject(new Error(`Script stderr: ${stderr}`));
+        console.warn('Warning from git diff:', stderr);
       }
+
+      if (!stdout.trim()) {
+        return reject(new Error('No changes detected in staged files'));
+      }
+
       resolve(stdout);
     });
   });

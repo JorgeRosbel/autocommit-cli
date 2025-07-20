@@ -80,7 +80,7 @@ const pompt_config = (language: string, template: string, size: string, diff: st
 
 export const commit = async () => {
   try {
-    const config_json = join(process.cwd(), 'autocommit.config.json');
+    const config_json = join(process.cwd(), 'gitbolt.config.json');
     const { template, model, size, language, provider } = JSON.parse(
       fs.readFileSync(config_json, 'utf-8')
     );

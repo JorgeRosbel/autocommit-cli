@@ -50,4 +50,4 @@ Thumbs.db
 *.json
 
 ts.config.json
-   
+.prettierignore

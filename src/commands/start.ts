@@ -134,23 +134,23 @@ const initApiKey = async () => {
   const out = `
   export API_KEY="${apiKey}"
 
-  if grep -q '^export AUTOCOMMIT_API_KEY=' ~/.bashrc; then
+  if grep -q '^export GITBOLT_API_KEY=' ~/.bashrc; then
     # Reemplaza la línea existente
-    sed -i "s|^export AUTOCOMMIT_API_KEY=.*|export AUTOCOMMIT_API_KEY=\"$API_KEY\"|" ~/.bashrc
+    sed -i "s|^export GITBOLT_API_KEY=.*|export GITBOLT_API_KEY=\"$API_KEY\"|" ~/.bashrc
   else
     # Añade la línea al final
-    echo "export AUTOCOMMIT_API_KEY=\"$API_KEY\"" >> ~/.bashrc
+    echo "export GITBOLT_API_KEY=\"$API_KEY\"" >> ~/.bashrc
   fi
 
   source ~/.bashrc
-  echo "✅ AUTOCOMMIT_API_KEY set to \"$API_KEY\""
+  echo "✅ GITBOLT_API_KEY set to \"$API_KEY\""
 
   `;
 
   console.log(
     boxen(
       chalk.blue(
-        'Copy and paste this script into your terminal to add AUTOCOMMIT_API_KEY to your environment variables:'
+        'Copy and paste this script into your terminal to add GITBOLT_API_KEY to your environment variables:'
       ),
       { padding: 1 }
     )
@@ -221,7 +221,7 @@ const saveConfig = (
     provider: provider,
   };
 
-  const config_json = join(process.cwd(), 'autocommit.config.json');
+  const config_json = join(process.cwd(), 'gitbolt.config.json');
 
   fs.writeFileSync(config_json, JSON.stringify(config, null, 2));
 
@@ -230,16 +230,16 @@ const saveConfig = (
 };
 
 export const start = async () => {
-  console.log(chalk.blue(figlet.textSync('AutoCommit CLI', { horizontalLayout: 'full' })));
+  console.log(chalk.blue(figlet.textSync('gitbolt CLI', { horizontalLayout: 'full' })));
 
   try {
-    const config_json = join(process.cwd(), 'autocommit.config.json');
+    const config_json = join(process.cwd(), 'gitbolt.config.json');
 
     if (fs.existsSync(config_json)) {
       console.log(
         boxen(
           chalk.green(
-            "You don't need to use autocommit start, you already have a configuration file!"
+            "You don't need to use gitbolt start, you already have a configuration file!"
           ),
           { padding: 1 }
         )

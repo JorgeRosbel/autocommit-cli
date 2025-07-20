@@ -1,12 +1,12 @@
 {
-  "name": "autocommit",
+  "name": "gitbolt",
   "version": "0.0.1",
   "description": "AI-powered CLI tool for automatic git commit message generation",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bin": {
-    "autocommit": "./dist/index.cjs"
+    "gitbolt": "dist/index.cjs"
   },
   "scripts": {
     "build": "tsup",

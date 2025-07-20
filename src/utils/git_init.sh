@@ -1,0 +1,7 @@
+#!/bin/bash
+git init
+
+
+
+
+

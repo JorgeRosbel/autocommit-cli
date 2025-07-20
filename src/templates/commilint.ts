@@ -1,0 +1,16 @@
+export const commilint = [
+  '✨ feat',
+  '🐛 fix',
+  '📝 docs',
+  '💄 style',
+  '♻️ refactor',
+  '⚡️ perf',
+  '✅ test',
+  '📦 build',
+  '👷 ci',
+  '🔒 security',
+  '⬆️ upgrade',
+  '⬇️ downgrade',
+  '🚀 chore',
+  '🔥 remove',
+];

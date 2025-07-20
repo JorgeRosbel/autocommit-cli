@@ -60,6 +60,11 @@ export const commit = async () => {
     const diff = await gitDiffScript();
     const { prompt, system_prompt } = pompt_config(language, template, size, diff);
 
+    if (diff.length === 0) {
+      console.log(chalk.red('Nothing to commit'));
+      process.exit(0);
+    }
+
     const openai = new OpenAI({
       apiKey: process.env.AUTOCOMMIT_API_KEY,
       baseURL: inferBaseURL(model),

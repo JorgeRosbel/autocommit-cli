@@ -37,24 +37,6 @@ const gitCommitScript = (message: string) => {
   });
 };
 
-// const gitDiffScript = (): Promise<string> => {
-
-//   const cm = `git diff --cached --unified=0 "$@" | grep -E '^[+-]' | grep -Ev '^(---|\+\+\+)'`
-
-//   return new Promise((resolve, reject) => {
-//     execFile('sh', ['-c',cm], (error, stdout, stderr) => {
-//       if (error) {
-//         process.exit(1);
-//         //   return reject(new Error(`Error executing script: ${error.message}`));
-//       }
-//       if (stderr) {
-//         return reject(new Error(`Script stderr: ${stderr}`));
-//       }
-//       resolve(stdout);
-//     });
-//   });
-// };
-
 const gitDiffScript = (): Promise<string> => {
   const gitDiffCommand = "git diff --cached --unified=0 | grep -E '^[+-][^+-]' || true";
 

@@ -2,5 +2,6 @@
   "language": "en",
   "template": "commitlint",
   "model": "gemini-2.5-flash",
-  "size": "51–80 characters"
+  "size": "36–50 characters",
+  "provider": "google"
 }

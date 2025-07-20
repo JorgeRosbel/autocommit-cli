@@ -188,12 +188,37 @@ const initLang = async () => {
   return selectedLanguage;
 };
 
-const saveConfig = (template: string, model: string, size: string, language: string) => {
+const initProviders = async () => {
+  const providers = [
+    { name: chalk.blue('openai'), value: 'openai' },
+    { name: chalk.green('google'), value: 'google' },
+  ];
+
+  const { provider } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'provider',
+      message: 'Select your provider:',
+      choices: providers,
+    },
+  ]);
+
+  return provider;
+};
+
+const saveConfig = (
+  template: string,
+  model: string,
+  size: string,
+  language: string,
+  provider: string
+) => {
   const config = {
     language: language,
     template: template,
     model: model,
     size: size,
+    provider: provider,
   };
 
   const config_json = join(process.cwd(), 'autocommit.config.json');
@@ -229,10 +254,9 @@ export const start = async () => {
     const language = await initLang();
     const model = await initModel();
     const size = await commitSize();
-    saveConfig(template, model, size, language);
+    const provider = await initProviders();
+    saveConfig(template, model, size, language, provider);
     await initApiKey();
-
-    //console.log(chalk.green( process.env.AUTOCOMMIT_API_KEY));
 
     console.log(boxen(chalk.green('Configuration completed successfully!'), { padding: 1 }));
 

@@ -2,24 +2,39 @@ import { execFile } from 'node:child_process';
 import { join } from 'path';
 import fs from 'fs';
 import commitTemplates from '../templates/templates';
-import OpenAI from 'openai';
 import boxen from 'boxen';
 import chalk from 'chalk';
+import { generateCommitGoo } from '../providers/google';
+import { generateCommitOpen } from '../providers/openai';
+import inquirer from 'inquirer';
 
 // npm run build && npm link
 
-const inferBaseURL = (model: string) => {
-  if (model.startsWith('gpt')) {
-    return 'https://api.openai.com/v1/chat/completions';
-  }
+const gitCommit = async (message: string) => {
+  const response = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'git_commit',
+      message: 'Do you want to commit with the previous message?',
+      default: true,
+    },
+  ]);
 
-  if (model.startsWith('claude')) {
-    return 'https://api.openai.com/v1/chat/completions';
+  if (response.git_commit) {
+    gitCommitScript(message);
   }
+};
 
-  if (model.startsWith('gemini')) {
-    return 'https://generativelanguage.googleapis.com/v1beta/openai/';
-  }
+const gitCommitScript = (message: string) => {
+  execFile('git', ['commit', '-m', message], (error, stdout, stderr) => {
+    if (error) {
+      console.error('❌ Error ejecutando git commit:', error.message);
+      process.exit(1);
+    }
+    if (stderr) {
+      console.warn(stderr);
+    }
+  });
 };
 
 const gitDiffScript = (): Promise<string> => {
@@ -46,6 +61,7 @@ const pompt_config = (language: string, template: string, size: string, diff: st
     The commit message should be ${size}.
     The commit message should be in ${language}.
     Infer the commit type based on the changes made and the commit message should be in ${commitTemplates[template].join(',')} format.
+    Do not use quotes
     `;
 
   const system_prompt = `You are a expert developer and you are going to write a commit message for a git commit using the best practices`;
@@ -56,7 +72,9 @@ const pompt_config = (language: string, template: string, size: string, diff: st
 export const commit = async () => {
   try {
     const config_json = join(process.cwd(), 'autocommit.config.json');
-    const { template, model, size, language } = JSON.parse(fs.readFileSync(config_json, 'utf-8'));
+    const { template, model, size, language, provider } = JSON.parse(
+      fs.readFileSync(config_json, 'utf-8')
+    );
     const diff = await gitDiffScript();
     const { prompt, system_prompt } = pompt_config(language, template, size, diff);
 
@@ -65,23 +83,21 @@ export const commit = async () => {
       process.exit(0);
     }
 
-    const openai = new OpenAI({
-      apiKey: process.env.AUTOCOMMIT_API_KEY,
-      baseURL: inferBaseURL(model),
-    });
+    let response: string | null = null;
 
-    const response = await openai.chat.completions.create({
-      model: model,
-      messages: [
-        { role: 'system', content: system_prompt },
-        {
-          role: 'user',
-          content: prompt,
-        },
-      ],
-    });
+    if (provider === 'google') {
+      response = await generateCommitGoo(model, system_prompt, prompt);
+    }
 
-    console.log(boxen(chalk.green(response.choices[0].message.content), { padding: 1 }));
+    if (provider === 'openai') {
+      response = await generateCommitOpen(model, system_prompt, prompt);
+    }
+
+    console.log(boxen(chalk.green(response), { padding: 1 }));
+
+    if (response) {
+      await gitCommit(response);
+    }
   } catch (error) {
     console.log(error);
     process.exit(1);

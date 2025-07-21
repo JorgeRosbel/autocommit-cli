@@ -76,7 +76,7 @@ Sets the language for your commit messages.
 Defines the format of your commit messages.
 
 ```ts
-'commitlint' | 'conventional'
+'commitlint' | 'conventional' | 'angular'
 ```
 
 #### `model` (type: `TModel`)

@@ -43,6 +43,7 @@ const gitCommitTemplate = async () => {
   const templates = [
     { name: chalk.green('commitlint'), value: 'commitlint' },
     { name: chalk.blue('conventional'), value: 'conventional' },
+    { name: chalk.blue('angular'), value: 'angular' },
   ];
 
   const { selectedTemplate } = await inquirer.prompt([

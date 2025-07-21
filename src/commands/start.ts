@@ -134,23 +134,23 @@ const initApiKey = async () => {
   const out = `
   export API_KEY="${apiKey}"
 
-  if grep -q '^export GITBOLT_API_KEY=' ~/.bashrc; then
+  if grep -q '^export GITZEN_API_KEY=' ~/.bashrc; then
     # Reemplaza la línea existente
-    sed -i "s|^export GITBOLT_API_KEY=.*|export GITBOLT_API_KEY=\"$API_KEY\"|" ~/.bashrc
+    sed -i "s|^export GITZEN_API_KEY=.*|export GITZEN_API_KEY=\"$API_KEY\"|" ~/.bashrc
   else
     # Añade la línea al final
-    echo "export GITBOLT_API_KEY=\"$API_KEY\"" >> ~/.bashrc
+    echo "export GITZEN_API_KEY=\"$API_KEY\"" >> ~/.bashrc
   fi
 
   source ~/.bashrc
-  echo "✅ GITBOLT_API_KEY set to \"$API_KEY\""
+  echo "✅ GITZEN_API_KEY set to \"$API_KEY\""
 
   `;
 
   console.log(
     boxen(
       chalk.blue(
-        'Copy and paste this script into your terminal to add GITBOLT_API_KEY to your environment variables:'
+        'Copy and paste this script into your terminal to add GITZEN_API_KEY to your environment variables:'
       ),
       { padding: 1 }
     )
@@ -221,7 +221,7 @@ const saveConfig = (
     provider: provider,
   };
 
-  const config_json = join(process.cwd(), 'gitbolt.config.json');
+  const config_json = join(process.cwd(), 'gitzen.config.json');
 
   fs.writeFileSync(config_json, JSON.stringify(config, null, 2));
 
@@ -230,17 +230,15 @@ const saveConfig = (
 };
 
 export const start = async () => {
-  console.log(chalk.blue(figlet.textSync('gitbolt CLI', { horizontalLayout: 'full' })));
+  console.log(chalk.blue(figlet.textSync('gitzen CLI', { horizontalLayout: 'full' })));
 
   try {
-    const config_json = join(process.cwd(), 'gitbolt.config.json');
+    const config_json = join(process.cwd(), 'gitzen.config.json');
 
     if (fs.existsSync(config_json)) {
       console.log(
         boxen(
-          chalk.green(
-            "You don't need to use gitbolt start, you already have a configuration file!"
-          ),
+          chalk.green("You don't need to use gitzen start, you already have a configuration file!"),
           { padding: 1 }
         )
       );

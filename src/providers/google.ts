@@ -1,5 +1,6 @@
 import OpenAI from 'openai';
 import ora from 'ora';
+import chalk from 'chalk';
 
 export const generateCommitGoo = async (
   model: string,
@@ -11,7 +12,7 @@ export const generateCommitGoo = async (
     baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
   });
 
-  const spinner = ora('Generating commit...').start();
+  const spinner = ora(chalk.yellow('Generating commit...')).start();
 
   try {
     const response = await openai.chat.completions.create({
@@ -25,7 +26,7 @@ export const generateCommitGoo = async (
       ],
     });
 
-    spinner.succeed();
+    spinner.succeed(chalk.green('Success!'));
     return response.choices[0].message.content;
   } catch (error) {
     console.log(error);

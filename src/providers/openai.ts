@@ -1,4 +1,6 @@
+import chalk from 'chalk';
 import OpenAI from 'openai';
+import ora from 'ora';
 
 export const generateCommitOpen = async (
   model: string,
@@ -8,6 +10,8 @@ export const generateCommitOpen = async (
   const openai = new OpenAI({
     apiKey: process.env.AUTOCOMMIT_API_KEY,
   });
+
+  const spinner = ora(chalk.yellow('Generating commit...')).start();
 
   try {
     const response = await openai.chat.completions.create({
@@ -21,8 +25,10 @@ export const generateCommitOpen = async (
       ],
     });
 
+    spinner.succeed(chalk.green('Success!'));
     return response.choices[0].message.content;
   } catch (error) {
+    spinner.fail();
     console.log(error);
     process.exit(1);
   }

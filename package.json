@@ -1,12 +1,12 @@
 {
-  "name": "gitbolt",
+  "name": "gitzen",
   "version": "0.0.1",
   "description": "AI-powered CLI tool for automatic git commit message generation",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bin": {
-    "gitbolt": "dist/index.cjs"
+    "gitzen": "dist/index.cjs"
   },
   "scripts": {
     "build": "tsup",
@@ -33,12 +33,12 @@
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JorgeRosbel/autocommit-cli"
+    "url": "git+https://github.com/JorgeRosbel/gitzen"
   },
   "bugs": {
-    "url": "https://github.com/JorgeRosbel/autocommit-cli/issues"
+    "url": "https://github.com/JorgeRosbel/gitzen/issues"
   },
-  "homepage": "https://github.com/JorgeRosbel/autocommit-cli#readme",
+  "homepage": "https://github.com/JorgeRosbel/gitzen#readme",
   "devDependencies": {
     "@types/figlet": "^1.7.0",
     "@types/inquirer": "^9.0.8",

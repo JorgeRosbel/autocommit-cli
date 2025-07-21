@@ -2,7 +2,7 @@ import { program } from 'commander';
 import { start } from './commands/start';
 import { commit } from './commands/commit';
 
-program.name('autocommit').description('CLI para commits automáticos');
+program.name('gitzen').description('CLI para commits automáticos');
 
 // Comando de inicio
 program

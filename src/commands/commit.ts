@@ -80,7 +80,7 @@ const pompt_config = (language: string, template: string, size: string, diff: st
 
 export const commit = async () => {
   try {
-    const config_json = join(process.cwd(), 'gitbolt.config.json');
+    const config_json = join(process.cwd(), 'gitzen.config.json');
     const { template, model, size, language, provider } = JSON.parse(
       fs.readFileSync(config_json, 'utf-8')
     );
@@ -102,7 +102,7 @@ export const commit = async () => {
       response = await generateCommitOpen(model, system_prompt, prompt);
     }
 
-    console.log(boxen(chalk.green(response), { padding: 1 }));
+    console.log(boxen(chalk.cyan(response), { padding: 1 }));
 
     if (response) {
       await gitCommit(response);

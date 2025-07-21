@@ -2,9 +2,7 @@
 
 **Gitzen** is a command-line tool that uses AI to automatically generate concise and well-formatted git commit messages. It integrates with popular AI providers like Google Gemini and supports customizable templates and languages.
 
-
 ![gitzen](./docs/gitzen.png)
-
 
 ---
 
@@ -61,13 +59,60 @@ It creates a configuration file in your project root called `gitzen.config.json`
 }
 ```
 
-You can customize:
+You can customize the following options manually in the config file:
 
-* **language**: Language for your commit messages (`en`, `es`, etc.)
-* **template**: Commit style (`commitlint`, `conventional`, etc.)
-* **model**: AI model to use (`gemini-2.5-flash`, etc.)
-* **size**: Desired character range for commits
-* **provider**: AI service provider (`google`, `openai`, etc.)
+### 📝 `gitzen.config.json` Options
+
+#### `language` (type: `TLang`)
+
+Sets the language for your commit messages.
+
+```ts
+'en' | 'es' | 'pt' | 'fr' | 'de' | 'it' | 'zh' | 'ja' | 'ko'
+```
+
+#### `template` (type: `TCommitTemplate`)
+
+Defines the format of your commit messages.
+
+```ts
+'commitlint' | 'conventional'
+```
+
+#### `model` (type: `TModel`)
+
+Specifies the AI model to use for generation.
+
+```ts
+'gpt-4.1'
+'gpt-4o-2024-08-06'
+'gpt-4o-mini'
+'gpt-4'
+'gpt-3.5-turbo'
+'gemini-2.5-flash'
+'gemini-2.0-flash'
+```
+
+You can also use any custom model string.
+
+#### `size` (type: `TSize`)
+
+Preferred length of the generated commit message.
+
+```ts
+'16–35 characters'
+'36–50 characters'
+'51–80 characters'
+'81–120 characters'
+```
+
+#### `provider` (type: `TProviders`)
+
+Chooses the AI service provider.
+
+```ts
+'google' | 'openai' | 'anthropics'
+```
 
 ---
 
@@ -79,19 +124,7 @@ Gitzen analyzes your staged changes and generates a concise message based on you
 
 ---
 
-## 🛠️ Configuration File: `gitzen.config.json`
-
-You can edit this file manually at any time to change:
-
-* The output language
-* The formatting template
-* The AI model
-* The provider
-* The length of your commit messages
-
----
-
-## ✅ Example Workflow
+## 🛠️ Example Workflow
 
 ```bash
 gitzen start        # Set up your preferences

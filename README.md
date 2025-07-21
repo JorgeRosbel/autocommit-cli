@@ -159,6 +159,13 @@ Generates a commit message using the configured AI model and creates the git com
 
 Gitzen analyzes your staged changes and generates a concise message based on your settings.
 
+
+### `gitzen summarize -l <language>`
+
+The `-l` (language) parameter is optional. If omitted, the `CLI` will use the language defined in your `gitzen.config.json` file.
+
+This command provides a summary of the changes made in both the **staging** area and the **working** directory.
+
 ---
 
 ## 🛠️ Example Workflow

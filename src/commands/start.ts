@@ -254,7 +254,9 @@ export const start = async () => {
     const size = await commitSize();
     const provider = await initProviders();
     saveConfig(template, model, size, language, provider);
-    await initApiKey();
+    if (!process.env.GITZEN_API_KEY) {
+      await initApiKey();
+    }
 
     console.log(boxen(chalk.green('Configuration completed successfully!'), { padding: 1 }));
 

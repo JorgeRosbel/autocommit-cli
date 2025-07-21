@@ -7,7 +7,7 @@ import chalk from 'chalk';
 import { generateCommitGoo } from '../providers/google';
 import { generateCommitOpen } from '../providers/openai';
 import inquirer from 'inquirer';
-
+import type { TLang, TCommitTemplate, TSize, IConigGitzen } from '../types';
 // npm run build && npm link
 
 const gitCommit = async (message: string) => {
@@ -63,7 +63,7 @@ const gitDiffScript = (): Promise<string> => {
   });
 };
 
-const pompt_config = (language: string, template: string, size: string, diff: string) => {
+const pompt_config = (language: TLang, template: TCommitTemplate, size: TSize, diff: string) => {
   const prompt = `
     Write a commit message for a git commit based on the following diff:
     ${diff}
@@ -83,7 +83,7 @@ export const commit = async () => {
     const config_json = join(process.cwd(), 'gitzen.config.json');
     const { template, model, size, language, provider } = JSON.parse(
       fs.readFileSync(config_json, 'utf-8')
-    );
+    ) as IConigGitzen;
     const diff = await gitDiffScript();
     const { prompt, system_prompt } = pompt_config(language, template, size, diff);
 

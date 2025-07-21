@@ -5,6 +5,7 @@ import fs from 'fs';
 import { join } from 'path';
 import boxen from 'boxen';
 import { execFile } from 'node:child_process';
+import type { TCommitTemplate, TModel, TSize, TLang, TProviders } from '../types';
 
 // npm run build && npm link && autocommit start
 
@@ -207,11 +208,11 @@ const initProviders = async () => {
 };
 
 const saveConfig = (
-  template: string,
-  model: string,
-  size: string,
-  language: string,
-  provider: string
+  template: TCommitTemplate,
+  model: TModel,
+  size: TSize,
+  language: TLang,
+  provider: TProviders
 ) => {
   const config = {
     language: language,
@@ -248,11 +249,11 @@ export const start = async () => {
     console.log(boxen(chalk.blue("Let's start the configuration process"), { padding: 1 }));
 
     await gitInit();
-    const template = await gitCommitTemplate();
-    const language = await initLang();
-    const model = await initModel();
-    const size = await commitSize();
-    const provider = await initProviders();
+    const template = (await gitCommitTemplate()) as TCommitTemplate;
+    const language = (await initLang()) as TLang;
+    const model = (await initModel()) as TModel;
+    const size = (await commitSize()) as TSize;
+    const provider = (await initProviders()) as TProviders;
     saveConfig(template, model, size, language, provider);
     if (!process.env.GITZEN_API_KEY) {
       await initApiKey();

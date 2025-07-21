@@ -4,8 +4,8 @@ import fs from 'fs';
 import commitTemplates from '../templates/templates';
 import boxen from 'boxen';
 import chalk from 'chalk';
-import { generateCommitGoo } from '../providers/google';
-import { generateCommitOpen } from '../providers/openai';
+import { generateGo } from '../providers/google';
+import { generateOpen } from '../providers/openai';
 import inquirer from 'inquirer';
 import type { TLang, TCommitTemplate, TSize, IConigGitzen } from '../types';
 // npm run build && npm link
@@ -117,11 +117,11 @@ export const commit = async () => {
     let response: string | null = null;
 
     if (provider === 'google') {
-      response = await generateCommitGoo(model, system_prompt, prompt);
+      response = await generateGo(model, system_prompt, prompt);
     }
 
     if (provider === 'openai') {
-      response = await generateCommitOpen(model, system_prompt, prompt);
+      response = await generateOpen(model, system_prompt, prompt);
     }
 
     console.log(boxen(chalk.cyan(response), { padding: 1 }));

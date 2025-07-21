@@ -2,7 +2,7 @@ import OpenAI from 'openai';
 import ora from 'ora';
 import chalk from 'chalk';
 
-export const generateCommitGoo = async (
+export const generateGo = async (
   model: string,
   system_prompt: string,
   prompt: string

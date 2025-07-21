@@ -64,14 +64,6 @@ const gitDiffScript = (): Promise<string> => {
 };
 
 const pompt_config = (language: TLang, template: TCommitTemplate, size: TSize, diff: string) => {
-  // const prompt = `
-  //   Write a commit message for a git commit based on the following diff:
-  //   ${diff}
-  //   The commit message should be ${size}.
-  //   The commit message should be in ${language}.
-  //   Infer the commit type based on the changes made and the commit message should be in ${commitTemplates[template].join(',')} format.
-  //   `;
-
   const requiresBody = ['angular', 'conventional'].includes(template);
 
   const prompt = `

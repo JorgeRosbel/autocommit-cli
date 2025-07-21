@@ -7,7 +7,8 @@ import { generateGo } from '../providers/google';
 import { generateOpen } from '../providers/openai';
 import { execFile } from 'child_process';
 
-const gitDiffScript = (): Promise<string> => {
+export const gitDiffScript = (): Promise<string> => {
+  // todos los cambios
   const gitDiffCommand = "git diff HEAD --unified=0 | grep -E '^[+-][^+-]' || true";
 
   return new Promise((resolve, reject) => {

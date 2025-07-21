@@ -1,4 +1,4 @@
-export type TCommitTemplate = 'commitlint' | 'conventional';
+export type TCommitTemplate = 'commitlint' | 'conventional' | 'angular';
 
 export type TProviders = 'google' | 'openai' | 'anthropics';
 

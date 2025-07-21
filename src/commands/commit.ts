@@ -64,13 +64,35 @@ const gitDiffScript = (): Promise<string> => {
 };
 
 const pompt_config = (language: TLang, template: TCommitTemplate, size: TSize, diff: string) => {
+  // const prompt = `
+  //   Write a commit message for a git commit based on the following diff:
+  //   ${diff}
+  //   The commit message should be ${size}.
+  //   The commit message should be in ${language}.
+  //   Infer the commit type based on the changes made and the commit message should be in ${commitTemplates[template].join(',')} format.
+  //   `;
+
+  const requiresBody = ['angular', 'conventional'].includes(template);
+
   const prompt = `
-    Write a commit message for a git commit based on the following diff:
-    ${diff}
-    The commit message should be ${size}.
-    The commit message should be in ${language}.
-    Infer the commit type based on the changes made and the commit message should be in ${commitTemplates[template].join(',')} format.
-    `;
+  You are an expert in writing well-formatted git commit messages.
+
+  Write a commit message based on this diff:
+  ${diff}
+
+  - Style: ${template}
+  - Language: ${language}
+  - Length: ${size}
+  - Format: ${commitTemplates[template].join(', ')}
+
+  ${
+    requiresBody
+      ? 'Include a body only if it adds valuable context. Do not include a footer unless required.'
+      : 'Only write the commit title. Do NOT include a body or footer.'
+  }
+    
+  Return only the formatted commit message.
+  `;
 
   const system_prompt = `You are a expert developer and you are going to write a commit message for a git commit using the best practices.
   Do NOT use backticks, triple backticks, or any other quotation marks`;

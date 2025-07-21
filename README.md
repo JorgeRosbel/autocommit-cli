@@ -6,6 +6,21 @@
 
 ---
 
+## 📚 Table of Contents
+
+* [Installation](#-installation)
+* [API Key Configuration](#-api-key-configuration)
+* [Commands](#-commands)
+
+  * [`gitzen start`](#gitzen-start)
+  * [`gitzen.config.json` Options](#-gitzenconfigjson-options)
+  * [`gitzen commit`](#gitzen-commit)
+* [Example Workflow](#️-example-workflow)
+* [Tips](#-tips)
+* [Coming Soon](#-coming-soon)
+
+---
+
 ## 📦 Installation
 
 You can install Gitzen globally using your preferred package manager:
@@ -38,6 +53,30 @@ export GITZEN_API_KEY="your-api-key-here"
 ```
 
 If you prefer, you can skip this step during setup and provide the key later.
+
+To manually create or update your API key for a specific model or service, follow these steps:
+
+1. Open your terminal and run the following command to edit your shell configuration file:
+
+```bash
+nano ~/.bashrc
+```
+
+2. Add your API key to the file by inserting this line (replace `secret_key` with your actual API key):
+
+```bash
+export GITZEN_API_KEY="secret_key"
+```
+
+3. Save and exit the editor (in nano, press `CTRL+O` to save and `CTRL+X` to exit).
+
+4. Apply the changes to your current terminal session by running:
+
+```bash
+source ~/.bashrc
+```
+
+This is the proper way to manually configure or update your API key in a Linux terminal environment. The key will now be available as an environment variable and can be accessed by your applications.
 
 ---
 
@@ -131,12 +170,12 @@ gitzen start        # Set up your preferences
 git add .           # Stage your changes
 gitzen commit       # Generate and commit with AI
 ```
+
 ### The generated commit messages are shown using different templates
 
 Please note that you have full control to review and choose whether to accept and execute the generated commit message
 
 ![gitzen](./docs/muestra.png)
-
 
 ---
 
@@ -152,6 +191,7 @@ Please note that you have full control to review and choose whether to accept an
 
 * Support for custom templates
 * Multiple model providers
+
 ---
 
 Gitzen simplifies and elevates your Git workflow with the power of AI. 🚀

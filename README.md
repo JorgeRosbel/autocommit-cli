@@ -2,8 +2,6 @@
 
 **Gitzen** is a command-line tool that uses AI to automatically generate concise and well-formatted git commit messages. It integrates with popular AI providers like Google Gemini and supports customizable templates and languages.
 
-![gitzen](./docs/gitzen.png)
-
 ---
 
 ## 📚 Table of Contents

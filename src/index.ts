@@ -1,6 +1,7 @@
 import { program } from 'commander';
 import { start } from './commands/start';
 import { commit } from './commands/commit';
+import { summarize } from './commands/summarize';
 
 program.name('gitzen').description('CLI para commits automáticos');
 
@@ -18,6 +19,15 @@ program
   .description('Automatically generates and performs a commit using AI.')
   .action(() => {
     commit();
+  });
+
+program
+  .command('summarize')
+  .description('')
+  .option('-l, --lang <code>')
+  .action(opts => {
+    const { lang } = opts;
+    summarize(lang);
   });
 
 // Mostrar ayuda por defecto

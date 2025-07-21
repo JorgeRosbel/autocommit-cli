@@ -11,7 +11,7 @@ export const generateOpen = async (
     apiKey: process.env.GITZEN_API_KEY,
   });
 
-  const spinner = ora(chalk.yellow('Generating commit...')).start();
+  const spinner = ora(chalk.blue('Generating...')).start();
 
   try {
     const response = await openai.chat.completions.create({

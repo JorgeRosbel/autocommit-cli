@@ -12,7 +12,7 @@ export const generateGo = async (
     baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
   });
 
-  const spinner = ora(chalk.yellow('Generating commit...')).start();
+  const spinner = ora(chalk.blue('Generating...')).start();
 
   try {
     const response = await openai.chat.completions.create({

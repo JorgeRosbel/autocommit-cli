@@ -131,6 +131,12 @@ gitzen start        # Set up your preferences
 git add .           # Stage your changes
 gitzen commit       # Generate and commit with AI
 ```
+### The generated commit messages are shown using different templates
+
+Please note that you have full control to review and choose whether to accept and execute the generated commit message
+
+![gitzen](./docs/muestra.png)
+
 
 ---
 
@@ -146,8 +152,6 @@ gitzen commit       # Generate and commit with AI
 
 * Support for custom templates
 * Multiple model providers
-* Inline commit preview before applying
-
 ---
 
 Gitzen simplifies and elevates your Git workflow with the power of AI. 🚀

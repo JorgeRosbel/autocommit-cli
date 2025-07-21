@@ -1,6 +1,6 @@
 {
   "language": "en",
-  "template": "angular",
+  "template": "commitlint",
   "model": "gemini-2.5-flash",
   "size": "36–50 characters",
   "provider": "google"

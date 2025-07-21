@@ -7,7 +7,7 @@ program.name('gitzen').description('CLI para commits automáticos');
 // Comando de inicio
 program
   .command('start')
-  .description('Muestra un mensaje de bienvenida')
+  .description('AI-powered CLI tool for automatic git commit message generation')
   .action(() => {
     start();
   });
@@ -15,7 +15,7 @@ program
 // Comando de commit
 program
   .command('commit')
-  .description('Realiza un commit automático')
+  .description('Automatically generates and performs a commit using AI.')
   .action(() => {
     commit();
   });
@@ -23,7 +23,7 @@ program
 // Mostrar ayuda por defecto
 if (process.argv.length <= 2) {
   program.outputHelp();
-  console.log('\nEjecuta autocommit start para comenzar');
+  console.log('\nRun "gitzen start" to initialize the setup');
   process.exit(0);
 }
 

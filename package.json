@@ -27,7 +27,12 @@
   "lint-staged:options": {
     "allowEmpty": true
   },
-  "keywords": ["git","cli","autocommit","ai-powered-tool"],
+  "keywords": [
+    "git",
+    "cli",
+    "autocommit",
+    "ai-powered-tool"
+  ],
   "author": "JorgeRosbel",
   "license": "ISC",
   "type": "commonjs",

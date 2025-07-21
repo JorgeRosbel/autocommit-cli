@@ -70,10 +70,10 @@ const pompt_config = (language: string, template: string, size: string, diff: st
     The commit message should be ${size}.
     The commit message should be in ${language}.
     Infer the commit type based on the changes made and the commit message should be in ${commitTemplates[template].join(',')} format.
-    Do not use quotes
     `;
 
-  const system_prompt = `You are a expert developer and you are going to write a commit message for a git commit using the best practices`;
+  const system_prompt = `You are a expert developer and you are going to write a commit message for a git commit using the best practices.
+  Do NOT use backticks, triple backticks, or any other quotation marks`;
 
   return { prompt, system_prompt };
 };

@@ -8,7 +8,7 @@ export const generateCommitGoo = async (
   prompt: string
 ): Promise<string | null> => {
   const openai = new OpenAI({
-    apiKey: process.env.AUTOCOMMIT_API_KEY,
+    apiKey: process.env.GITZEN_API_KEY,
     baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
   });
 

@@ -1,7 +1,7 @@
 {
   "language": "en",
   "template": "commitlint",
-  "model": "gemini-2.5-flash",
+  "model": "gpt-4.1-nano-2025-04-14",
   "size": "36–50 characters",
-  "provider": "google"
+  "provider": "openai"
 }

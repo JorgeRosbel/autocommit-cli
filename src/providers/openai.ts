@@ -8,7 +8,7 @@ export const generateCommitOpen = async (
   prompt: string
 ): Promise<string | null> => {
   const openai = new OpenAI({
-    apiKey: process.env.AUTOCOMMIT_API_KEY,
+    apiKey: process.env.GITZEN_API_KEY,
   });
 
   const spinner = ora(chalk.yellow('Generating commit...')).start();

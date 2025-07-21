@@ -65,6 +65,10 @@ const initModel = async () => {
       value: 'gpt-4.1',
     },
     {
+      name: `${chalk.green('gpt-4.1-nano-2025-04-14')} - ${chalk.dim('Fastest, most cost-effective GPT-4.1 model')}`,
+      value: 'gpt-4.1-nano-2025-04-14',
+    },
+    {
       name: `${chalk.blue('gpt-4o-2024-08-06')} ${chalk.yellow('🧠')} - High precision with zodResponseFormat`,
       value: 'gpt-4o-2024-08-06',
     },

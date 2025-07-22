@@ -21,7 +21,8 @@ export const gitAllChanges = (): Promise<string> => {
 
       if (!stdout.trim()) {
         console.log(chalk.red('No changes detected in staged files'));
-        return reject();
+        process.exit(1);
+        //return reject();
       }
 
       resolve(stdout);

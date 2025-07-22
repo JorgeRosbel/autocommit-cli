@@ -7,6 +7,7 @@ export default defineConfig({
   dts: true,
   splitting: false,
   sourcemap: true,
+  minify: true,
   clean: true,
   outDir: 'dist',
   // Especifica el nombre del archivo de salida para CommonJS

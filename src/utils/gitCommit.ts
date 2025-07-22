@@ -32,7 +32,7 @@ export const gitCommitAsync = (message: string): Promise<string> => {
   const cmd = `git commit -m "${safeMessage}"`;
 
   return new Promise((resolve, reject) => {
-    exec(cmd, (error, stdout, stderr) => {
+    exec(cmd, (error, _, stderr) => {
       if (error) {
         // imprimes stderr para depurar si lo necesitas
         console.error('git stderr:', stderr);
@@ -41,7 +41,7 @@ export const gitCommitAsync = (message: string): Promise<string> => {
       if (stderr) {
         console.warn(stderr);
       }
-      resolve(stdout.trim() || `✔  Commit "${message}" created successfully.`);
+      resolve(`✔  Commit "${message}" created successfully.`);
     });
   });
 };

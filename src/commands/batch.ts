@@ -94,7 +94,7 @@ const buildBatchAnalysisOutputDetailed = (response: GitzenBatchResponse): string
   let output = '';
 
   // Header con análisis
-  output += `🧠 Analyzing staged changes...\n\n`;
+  output += `🧠 Analyzing changes not in staging....\n\n`;
   output += `Found ${response.analysis.groupsFound} logical groups:\n`;
 
   if (response.analysis.confidence) {

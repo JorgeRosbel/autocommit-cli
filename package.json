@@ -1,7 +1,7 @@
 {
   "name": "gitzen",
   "version": "0.0.6",
-  "description": "AI-powered CLI tool for automatic git commit message generation",
+  "description": "🧠 AI-powered CLI tool for automatic git commit message generation",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -31,10 +31,12 @@
     "git",
     "cli",
     "autocommit",
-    "ai-powered-tool"
+    "ai-powered-tool",
+    "github",
+    "workflow"
   ],
   "author": "JorgeRosbel",
-  "license": "ISC",
+  "license": "MIT",
   "type": "commonjs",
   "repository": {
     "type": "git",

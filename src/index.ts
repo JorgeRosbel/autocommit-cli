@@ -24,7 +24,9 @@ program
 
 program
   .command('summarize')
-  .description('')
+  .description(
+    'This command provides a summary of the changes made in both the staging area and the working'
+  )
   .option('-l, --lang <code>')
   .action(opts => {
     const { lang } = opts;
@@ -33,7 +35,9 @@ program
 
 program
   .command('batch')
-  .description('Automatically generates and performs a commit using AI.')
+  .description(
+    'Gitzen uses AI to automatically analyze your unstaged changes, group them into logical blocks (e.g., new features, refactors, dependency updates), assign them a priority, and generate a separate commit for each group in order of importance.'
+  )
   .action(() => {
     batchCommit();
   });

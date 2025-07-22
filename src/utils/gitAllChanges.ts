@@ -16,7 +16,8 @@ export const gitAllChanges = (): Promise<string> => {
       }
 
       if (stderr) {
-        console.warn('Warning from git diff:', stderr);
+        console.log(chalk.yellow('Warning from git diff:', stderr));
+        process.exit(1);
       }
 
       if (!stdout.trim()) {

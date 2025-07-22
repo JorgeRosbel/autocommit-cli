@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { execFile } from 'node:child_process';
 
 export const gitWorkingDiff = (): Promise<string> => {
@@ -20,7 +21,9 @@ export const gitWorkingDiff = (): Promise<string> => {
 
       // si no hay salida, rechazamos
       if (!stdout.trim()) {
-        return reject(new Error('No unstaged changes detected'));
+        console.log(chalk.red('No unstaged changes detected'));
+        process.exit(1);
+        //return reject(new Error('No unstaged changes detected'));
       }
 
       resolve(stdout);

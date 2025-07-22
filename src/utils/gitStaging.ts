@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { execFile } from 'node:child_process';
 
 export const gitStaging = (): Promise<string> => {
@@ -18,7 +19,9 @@ export const gitStaging = (): Promise<string> => {
       }
 
       if (!stdout.trim()) {
-        return reject(new Error('No changes detected in staged files'));
+        //return reject(new Error('No changes detected in staged files'));
+        console.log(chalk.red('No changes detected in staged files'));
+        process.exit(1);
       }
 
       resolve(stdout);

@@ -3,18 +3,21 @@ import { start } from './commands/start';
 import { commit } from './commands/commit';
 import { summarize } from './commands/summarize';
 import { batchCommit } from './commands/batch';
+import { customHelp, HelpText } from './commands/gitzen_';
 
-program.name('gitzen').description('CLI para commits automáticos');
+program.name('gitzen').addHelpText('beforeAll', () => HelpText);
 
-// Comando de inicio
+program.configureHelp({
+  formatHelp: () => customHelp,
+});
+
 program
   .command('start')
-  .description('AI-powered CLI tool for automatic git commit message generation')
+  .description('Init cli config')
   .action(() => {
     start();
   });
 
-// Comando de commit
 program
   .command('commit')
   .description('Automatically generates and performs a commit using AI.')
@@ -42,18 +45,9 @@ program
     batchCommit();
   });
 
-// Mostrar ayuda por defecto
-if (process.argv.length <= 2) {
-  program.outputHelp();
-  console.log('\nRun "gitzen start" to initialize the setup');
-  process.exit(0);
-}
-
-// Manejar errores no capturados
 process.on('unhandledRejection', error => {
   console.error('Error inesperado:', error);
   process.exit(1);
 });
 
-// Ejecutar el comando
 program.parse(process.argv);

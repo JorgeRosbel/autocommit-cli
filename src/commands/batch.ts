@@ -178,8 +178,9 @@ async function runSequential(payload: TPayload) {
   for (const item of payload) {
     const { commit, files } = item;
 
-    await gitAdd(files);
+    const res = await gitAdd(files);
     gitCommit(commit);
+    console.log(chalk.green(res));
   }
 }
 

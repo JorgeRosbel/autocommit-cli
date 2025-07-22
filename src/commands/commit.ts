@@ -3,7 +3,7 @@ import boxen from 'boxen';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import type { TLang, TCommitTemplate, TSize } from '../types';
-import { gitCommit } from '../utils/gitCommit';
+import { gitCommitAsync } from '../utils/gitCommit';
 import { gitStaging } from '../utils/gitStaging';
 import { getGitzenConfig } from '../utils/getGitzenConfig';
 import { PlaninResponse } from '../utils/PlainResponse';
@@ -19,7 +19,8 @@ const execCommit = async (message: string) => {
   ]);
 
   if (response.git_commit) {
-    gitCommit(message);
+    const r = await gitCommitAsync(message);
+    console.log(chalk.green(r));
   }
 };
 

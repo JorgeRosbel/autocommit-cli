@@ -11,3 +11,17 @@ export const gitCommit = (message: string) => {
     }
   });
 };
+
+export const gitCommitAsync = (message: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    execFile('git', ['commit', '-m', message], (error, _, stderr) => {
+      if (error) {
+        return reject(new Error(`❌ Error ejecutando git commit: ${error.message}`));
+      }
+      if (stderr) {
+        console.warn(stderr);
+      }
+      resolve(`✔  Commit "${message}" created successfully.`);
+    });
+  });
+};

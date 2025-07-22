@@ -19,6 +19,8 @@ export const gitAdd = async (files: string | string[]): Promise<string> => {
     // Creamos los argumentos para 'git add'
     const args = ['add', ...fileList];
 
+    console.log(fileList);
+
     execFile('git', args, (error, _, stderr) => {
       if (error) {
         if (error.code === 128) {

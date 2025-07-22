@@ -1,7 +1,7 @@
 import { gitWorkingDiff } from '../utils/gitWorking';
 import { getGitzenConfig } from '../utils/getGitzenConfig';
 import { gitStatus } from '../utils/gitStatus';
-import { gitCommit } from '../utils/gitCommit';
+import { gitCommitAsync } from '../utils/gitCommit';
 
 import { StructuredResponse } from '../utils/StructuredResponse';
 import { TCommitTemplate, TLang, TSize } from '../types';
@@ -179,8 +179,10 @@ async function runSequential(payload: TPayload) {
     const { commit, files } = item;
 
     const res = await gitAdd(files);
-    gitCommit(commit);
+    const ms = await gitCommitAsync(commit);
+
     console.log(chalk.green(res));
+    console.log(chalk.green(ms));
   }
 }
 

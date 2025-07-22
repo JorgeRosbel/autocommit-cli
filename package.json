@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "dev": "ts-node src/index.ts",
+    "build:dev": "npm run build && npm link",
     "start": "node dist/index.cjs",
     "watch": "tsup --watch",
     "format": "prettier --write \"**/*.{js,ts}\"",

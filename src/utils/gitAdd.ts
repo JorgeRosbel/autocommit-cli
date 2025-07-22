@@ -28,7 +28,7 @@ export const gitAdd = async (files: string | string[]): Promise<string> => {
         return reject(new Error(`Error executing git add: ${error.message}. Stderr: ${stderr}`));
       }
 
-      resolve('✔Files added successfully.');
+      resolve('✔ Files added successfully.');
     });
   });
 };

@@ -1,9 +1,10 @@
 import { program } from 'commander';
-import { start } from './commands/start';
-import { commit } from './commands/commit';
-import { summarize } from './commands/summarize';
-import { batchCommit } from './commands/batch';
+import { start } from '@/commands/start';
+import { commit } from '@/commands/commit';
+import { summarize } from '@/commands/summarize';
+import { batchCommit } from '@/commands/batch';
 import { customHelp, HelpText } from './commands/gitzen_';
+import { review } from '@/commands/review';
 
 program.name('gitzen').addHelpText('beforeAll', () => HelpText);
 
@@ -43,6 +44,17 @@ program
   )
   .action(() => {
     batchCommit();
+  });
+
+program
+  .command('review')
+  .description(
+    'This command provides a summary of the changes made in both the staging area and the working'
+  )
+  .option('-l, --lang <code>')
+  .action(opts => {
+    const { lang } = opts;
+    review(lang);
   });
 
 process.on('unhandledRejection', error => {

@@ -1,14 +1,19 @@
 import { gitWorkingDiff } from '../utils/gitWorking';
 import { getGitzenConfig } from '../utils/getGitzenConfig';
 import { gitStatus } from '../utils/gitStatus';
-//import { gitCommit } from "../utils/gitCommit";
+import { gitCommit } from '../utils/gitCommit';
 
 import { StructuredResponse } from '../utils/StructuredResponse';
 import { TCommitTemplate, TLang, TSize } from '../types';
 import commitTemplates from '../templates/templates';
 import chalk from 'chalk';
 import boxen from 'boxen';
-//import { gitAdd } from "../utils/gitAdd";
+import { gitAdd } from '../utils/gitAdd';
+
+import { type GitzenBatchResponse } from '../utils/StructuredResponse';
+import inquirer from 'inquirer';
+
+type TPayload = { commit: string; files: string }[];
 
 const prompt_config = (
   language: TLang,
@@ -59,9 +64,6 @@ const prompt_config = (
 
   return { prompt, system_prompt };
 };
-
-import { type GitzenBatchResponse } from '../utils/StructuredResponse';
-import inquirer from 'inquirer';
 
 const buildBatchAnalysisOutput = (response: GitzenBatchResponse): string => {
   let output = '';
@@ -163,18 +165,23 @@ const giBatchConfirm = async (text: string) => {
   const response = await inquirer.prompt([
     {
       type: 'confirm',
-      name: 'git_init',
+      name: 'confirm',
       message: text,
       default: true,
     },
   ]);
 
-  if (response.git_init) {
-    console.log('se confirma todo OK');
-  } else {
-    console.log('se rechaza todo F');
-  }
+  return response.confirm;
 };
+
+async function runSequential(payload: TPayload) {
+  for (const item of payload) {
+    const { commit, files } = item;
+
+    await gitAdd(files);
+    gitCommit(commit);
+  }
+}
 
 export const batchCommit = async () => {
   try {
@@ -189,18 +196,24 @@ export const batchCommit = async () => {
     console.log(boxen(chalk.yellow(res), { padding: 1 }));
 
     let question = `Do you want to perform the following actions?:\n\n`;
+    const payload: TPayload = [];
 
     response.groups.forEach((group, index) => {
       const paths = group.files.map(v => v.path).join(' ');
       const commit_msg = response.suggestedCommits[index].message;
       const info = `git add ${paths}\ngit commit -m "${commit_msg}"\n\n`;
+      payload.push({ commit: commit_msg, files: paths });
 
       question += info;
     });
 
     console.log(boxen(chalk.cyan(question), { padding: 1 }));
 
-    await giBatchConfirm('Proceed?');
+    const confirm = await giBatchConfirm('Proceed?');
+
+    if (confirm) {
+      runSequential(payload);
+    }
   } catch (error) {
     console.log(error);
     process.exit(1);

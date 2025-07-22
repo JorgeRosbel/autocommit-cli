@@ -21,7 +21,8 @@
 * [Installation](#-installation)
 * Commands
   * [`start`](./docs/start.md)
-  * [`commit`](./docs/commit.md.md)
+  * [`commit`](./docs/commit.md)
+  * [`summarize`](./docs/summarize.md)
   * [`batch`](./docs/batch.md)
 ---
 

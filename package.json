@@ -47,6 +47,7 @@
   },
   "homepage": "https://github.com/JorgeRosbel/gitzen#readme",
   "devDependencies": {
+    "@esbuild-plugins/tsconfig-paths": "^0.1.2",
     "@types/figlet": "^1.7.0",
     "@types/inquirer": "^9.0.8",
     "@types/node": "^24.0.15",

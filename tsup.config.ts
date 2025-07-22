@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsup';
+import { TsconfigPathsPlugin } from '@esbuild-plugins/tsconfig-paths';
 
 export default defineConfig({
   entry: ['src/index.ts'],
@@ -18,4 +19,5 @@ export default defineConfig({
   banner: {
     js: '#!/usr/bin/env node',
   },
+  esbuildPlugins: [TsconfigPathsPlugin({})],
 });

@@ -1,16 +1,14 @@
-import { execFile } from 'node:child_process';
-import { join } from 'path';
-import fs from 'fs';
 import commitTemplates from '../templates/templates';
 import boxen from 'boxen';
 import chalk from 'chalk';
-import { generateGo } from '../providers/google';
-import { generateOpen } from '../providers/openai';
 import inquirer from 'inquirer';
-import type { TLang, TCommitTemplate, TSize, IConigGitzen } from '../types';
-// npm run build && npm link
+import type { TLang, TCommitTemplate, TSize } from '../types';
+import { gitCommit } from '../utils/gitCommit';
+import { gitStaging } from '../utils/gitStaging';
+import { getGitzenConfig } from '../utils/getGitzenConfig';
+import { PlaninResponse } from '../utils/PlainResponse';
 
-const gitCommit = async (message: string) => {
+const execCommit = async (message: string) => {
   const response = await inquirer.prompt([
     {
       type: 'confirm',
@@ -21,46 +19,8 @@ const gitCommit = async (message: string) => {
   ]);
 
   if (response.git_commit) {
-    gitCommitScript(message);
+    gitCommit(message);
   }
-};
-
-const gitCommitScript = (message: string) => {
-  execFile('git', ['commit', '-m', message], (error, _, stderr) => {
-    if (error) {
-      console.error('❌ Error ejecutando git commit:', error.message);
-      process.exit(1);
-    }
-    if (stderr) {
-      console.warn(stderr);
-    }
-  });
-};
-
-const gitDiffScript = (): Promise<string> => {
-  const gitDiffCommand = "git diff --cached --unified=0 | grep -E '^[+-][^+-]' || true";
-
-  return new Promise((resolve, reject) => {
-    execFile('sh', ['-c', gitDiffCommand], (error, stdout, stderr) => {
-      if (error) {
-        // If there are no staged changes, git diff returns exit code 1
-        if (error.code === 1 && !stdout && !stderr) {
-          return reject(new Error('No staged changes to commit'));
-        }
-        return reject(new Error(`Error executing git diff: ${error.message}`));
-      }
-
-      if (stderr) {
-        console.warn('Warning from git diff:', stderr);
-      }
-
-      if (!stdout.trim()) {
-        return reject(new Error('No changes detected in staged files'));
-      }
-
-      resolve(stdout);
-    });
-  });
 };
 
 const pompt_config = (language: TLang, template: TCommitTemplate, size: TSize, diff: string) => {
@@ -94,11 +54,8 @@ const pompt_config = (language: TLang, template: TCommitTemplate, size: TSize, d
 
 export const commit = async () => {
   try {
-    const config_json = join(process.cwd(), 'gitzen.config.json');
-    const { template, model, size, language, provider } = JSON.parse(
-      fs.readFileSync(config_json, 'utf-8')
-    ) as IConigGitzen;
-    const diff = await gitDiffScript();
+    const { template, model, size, language, provider } = getGitzenConfig();
+    const diff = await gitStaging();
     const { prompt, system_prompt } = pompt_config(language, template, size, diff);
 
     if (diff.length === 0) {
@@ -106,20 +63,12 @@ export const commit = async () => {
       process.exit(0);
     }
 
-    let response: string | null = null;
-
-    if (provider === 'google') {
-      response = await generateGo(model, system_prompt, prompt);
-    }
-
-    if (provider === 'openai') {
-      response = await generateOpen(model, system_prompt, prompt);
-    }
+    const response = await PlaninResponse({ provider, model, system_prompt, prompt });
 
     console.log(boxen(chalk.cyan(response), { padding: 1 }));
 
     if (response) {
-      await gitCommit(response);
+      await execCommit(response);
     }
   } catch (error) {
     console.log(error);

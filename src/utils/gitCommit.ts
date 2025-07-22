@@ -41,7 +41,7 @@ export const gitCommitAsync = (message: string): Promise<string> => {
       if (stderr) {
         console.warn(stderr);
       }
-      resolve(`✔  Commit "${message}" created successfully.`);
+      resolve(`✔ Commit "${message}" created successfully.`);
     });
   });
 };

@@ -10,8 +10,6 @@ export const packageJson = JSON.parse(
 
 const customMessage = `
 🚀 A new version is available!
-📦 Current: {currentVersion}
-✨ Latest:  {latestVersion}
 👉 Update now with: gitzen update
 `;
 

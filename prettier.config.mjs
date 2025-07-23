@@ -1,6 +1,5 @@
 /** @type {import("prettier").Options} */
 export default {
-    // Reglas generales para TypeScript
     semi: true,
     singleQuote: true,
     printWidth: 100,
@@ -8,8 +7,6 @@ export default {
     trailingComma: "es5",
     bracketSpacing: true,
     arrowParens: "avoid",
-  
-    // Sólo aplicar estas reglas a archivos .ts
     overrides: [
       {
         files: "*.ts",

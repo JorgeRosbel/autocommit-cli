@@ -1,17 +1,16 @@
 {
   "name": "gitzen",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "🧠 AI-powered CLI tool for automatic git commit message generation",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
+  "main": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "bin": {
-    "gitzen": "dist/index.cjs"
+    "gitzen": "dist/index.mjs"
   },
   "scripts": {
     "build": "tsup",
     "build:dev": "npm run build && npm link",
-    "start": "node dist/index.cjs",
+    "start": "node dist/index.mjs",
     "watch": "tsup --watch",
     "format": "prettier --write \"**/*.{js,ts}\"",
     "check": "prettier --check \"**/*.{js,ts}\"",
@@ -37,7 +36,7 @@
   ],
   "author": "JorgeRosbel",
   "license": "Apache-2.0",
-  "type": "commonjs",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JorgeRosbel/gitzen"

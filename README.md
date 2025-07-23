@@ -1,6 +1,6 @@
 [![npm version](https://img.shields.io/npm/v/gitzen.svg)](https://www.npmjs.com/package/gitzen)
 [![Downloads/week](https://img.shields.io/npm/dw/gitzen.svg)](https://www.npmjs.com/package/gitzen)
-[![Build Status](https://github.com/JorgeRosbel/gitzen/actions/workflows/publish.yml/badge.svg)](https://github.com/JorgeRosbel/gitzen/actions)
+[![Build Status](https://github.com/JorgeRosbel/gitzen/actions/workflows/publish.yaml/badge.svg)](https://github.com/JorgeRosbel/gitzen/actions)
 [![License](https://img.shields.io/npm/l/gitzen.svg)](LICENSE)
 
 # Gitzen: AI-powered CLI Tool for Automatic Git Commit Message Generation

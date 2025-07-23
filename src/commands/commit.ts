@@ -36,7 +36,7 @@ const pompt_config = (language: TLang, template: TCommitTemplate, size: TSize, d
   - Style: ${template}
   - Language: ${language}
   - Length: ${size}
-  - Format: ${commitTemplates[template].join(', ')}
+  - Format: ${commitTemplates[template].join(',')}
 
   ${
     requiresBody

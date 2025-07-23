@@ -39,6 +39,8 @@ gitzen commit
 
 *A screenshot would show the suggestion and approval process.*
 
+![commit](commit.png)
+
 After accepting the commit:
 
 ```sh
@@ -62,6 +64,8 @@ gitzen summarize -l es
 
 *A screenshot would help visualize the summary output.*
 
+![summarize](summarize.png)
+
 ---
 
 ## 📂 `gitzen batch`
@@ -81,7 +85,9 @@ It will:
 * Ask for your confirmation
 
 Upon approval, Gitzen stages and commits the files for you.
-*A diagram or screenshot would illustrate the grouping process.*
+*A screenshot would illustrate the grouping process.*
+
+![batch](batch.png)
 
 ---
 
@@ -100,3 +106,4 @@ gitzen review -l es
 ```
 
 *An image could show the score and feedback given by the AI.*
+![review](review.png)

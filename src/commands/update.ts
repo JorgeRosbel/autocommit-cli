@@ -7,9 +7,6 @@ import { packageJson } from '@/utils/notify';
 
 const execAsync = promisify(exec);
 
-// ================================================================
-
-// OPCIÓN 1: Comando update básico
 export const updateCommand = async () => {
   try {
     console.log(chalk.blue('🔍 Checking for updates...'));

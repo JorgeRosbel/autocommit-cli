@@ -8,7 +8,6 @@ export const packageJson = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8')
 );
 
-// OPCIÓN 1: Usando las plantillas de update-notifier (RECOMENDADO)
 const customMessage = `
 🚀 A new version is available!
 📦 Current: {currentVersion}

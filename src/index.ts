@@ -5,12 +5,18 @@ import { summarize } from '@/commands/summarize';
 import { batchCommit } from '@/commands/batch';
 import { customHelp, HelpText } from './commands/gitzen_';
 import { review } from '@/commands/review';
+import { notify } from '@/utils/notify';
+import { updateCommand } from '@/commands/update';
+
+notify();
 
 program.name('gitzen').addHelpText('beforeAll', () => HelpText);
 
 program.configureHelp({
   formatHelp: () => customHelp,
 });
+
+program.command('update').description('Update gitzen to the latest version').action(updateCommand);
 
 program
   .command('start')
@@ -48,9 +54,7 @@ program
 
 program
   .command('review')
-  .description(
-    'This command provides a summary of the changes made in both the staging area and the working'
-  )
+  .description('Gives you a review of the code in the staging area')
   .option('-l, --lang <code>')
   .action(opts => {
     const { lang } = opts;

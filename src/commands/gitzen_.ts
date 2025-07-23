@@ -18,12 +18,12 @@ const customHelp = boxen(
 
 ${chalk.bold('Commands:')}
 
-  ${chalk.green('start')}         Initialize Gitzen setup and config
-  ${chalk.green('commit')}        Generate commit message with AI from staged changes
-  ${chalk.green('summarize')}     Summarize changes in staging/working dir
-  ${chalk.green('batch')}         Group unstaged changes and commit in logical order
-  ${chalk.green('review')}        Gives you a review of the code in the staging area
-  ${chalk.green('update')}        Checks for and updates the CLI if available
+  ${chalk.green('start')}         🚀 Initialize Gitzen setup and config
+  ${chalk.green('commit')}        💾 Generate commit message with AI from staged changes
+  ${chalk.green('summarize')}     🧠 Summarize changes in staging/working dir
+  ${chalk.green('batch')}         📂 Group unstaged changes and commit in logical order
+  ${chalk.green('review')}        🔍 Gives you a review of the code in the staging area
+  ${chalk.green('update')}        🔄 Checks for and updates the CLI if available
 
 🔧 Run ${chalk.cyanBright('gitzen start')} to initialize the configuration
 `,

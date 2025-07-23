@@ -23,13 +23,16 @@
 
 ## 📚 Table of Contents
 
-* [Installation](#-installation)
-* Commands
-  * [`start`](./docs/start.md)
-  * [`commit`](./docs/commit.md)
-  * [`summarize`](./docs/summarize.md)
-  * [`batch`](./docs/batch.md)
-  * [`review`](./docs/review.md)
+
+* [📦 Installation](#-installation)
+* [🛠️ Commands](#-gitzen-command-summary)
+  * [🚀 Start](./docs/start.md)
+  * [💾 Commit](./docs/commit.md)
+  * [🧠 Summarize](./docs/summarize.md)
+  * [📂 Batch](./docs/batch.md)
+  * [🔍 Review](./docs/review.md)
+* [Gitzen Command Usage & Best Practices](./docs/examples.md)
+
 ---
 
 ## 📦 Installation
@@ -45,4 +48,16 @@ yarn global add gitzen
 ```
 
 Once installed globally, the `gitzen` command will be available anywhere in your system.
+
+## 🧾 Gitzen Command Summary
+
+| Command            | Description                                            | Notes                         |
+| ------------------ | ------------------------------------------------------ | ----------------------------- |
+| `gitzen start`     | 🚀 Initialize Gitzen setup and config                  | Run once to configure the CLI |
+| `gitzen commit`    | 💾 Generate commit message with AI from staged changes | Requires staged files         |
+| `gitzen summarize` | 🧠 Summarize changes in staging/working dir            | Optional: `-l <language>`     |
+| `gitzen batch`     | 📂 Group unstaged changes and commit in logical order  | Useful for organizing commits |
+| `gitzen review`    | 🔍 Gives you a review of the code in the staging area  | Optional: `-l <language>`     |
+| `gitzen update`    | 🔄 Checks for and updates the CLI if available         | Keep Gitzen up to date easily |
+
 

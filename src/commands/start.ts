@@ -1,4 +1,3 @@
-import figlet from 'figlet';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import fs from 'fs';
@@ -236,8 +235,6 @@ const saveConfig = (
 };
 
 export const start = async () => {
-  console.log(chalk.blue(figlet.textSync('gitzen CLI', { horizontalLayout: 'full' })));
-
   try {
     const config_json = join(process.cwd(), 'gitzen.config.json');
 

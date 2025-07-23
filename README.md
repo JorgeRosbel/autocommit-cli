@@ -1,3 +1,8 @@
+[![npm version](https://img.shields.io/npm/v/gitzen.svg)](https://www.npmjs.com/package/gitzen)
+[![Downloads/week](https://img.shields.io/npm/dw/gitzen.svg)](https://www.npmjs.com/package/gitzen)
+[![Build Status](https://github.com/JorgeRosbel/gitzen/actions/workflows/publish.yml/badge.svg)](https://github.com/JorgeRosbel/gitzen/actions)
+[![License](https://img.shields.io/npm/l/gitzen.svg)](LICENSE)
+
 # Gitzen: AI-powered CLI Tool for Automatic Git Commit Message Generation
 
 **Gitzen** is a command-line tool that uses AI to automatically generate concise and well-formatted git commit messages. It integrates with popular AI providers like Google Gemini and supports customizable templates and languages.

@@ -1,5 +1,5 @@
 export const commilint = [
-  '**ALWAYS USE EMOJIS AND WRITE THE COMMIT MESSAGE AFTER THE COLON**',
+  '**ALWAYS USE A SINGLE EMOJI (ONLY ONE) AND WRITE THE COMMIT MESSAGE AFTER THE COLON**',
   '✨ feat:',
   '🐛 fix:',
   '📝 docs:',

@@ -5,18 +5,12 @@ import { summarize } from '@/commands/summarize';
 import { batchCommit } from '@/commands/batch';
 import { customHelp, HelpText } from './commands/gitzen_';
 import { review } from '@/commands/review';
-import { notify } from '@/utils/notify';
-import { updateCommand } from '@/commands/update';
-
-notify();
 
 program.name('gitzen').addHelpText('beforeAll', () => HelpText);
 
 program.configureHelp({
   formatHelp: () => customHelp,
 });
-
-program.command('update').description('Update gitzen to the latest version').action(updateCommand);
 
 program
   .command('start')

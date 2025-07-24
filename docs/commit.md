@@ -2,7 +2,7 @@
 
 ### 📌 Description
 
-**Command:** `gitzen commit`
+**Command:** `gitzen commit` (use `-y` to *auto-accept* the commits suggested by the AI)
 
 Generates a commit message using the configured AI model and creates a Git commit **only after user confirmation**. Gitzen analyzes your **staged changes** and generates a clear, concise message based on your configuration settings.
 

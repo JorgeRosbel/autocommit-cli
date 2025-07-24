@@ -43,13 +43,25 @@ program
     summarize(lang);
   });
 
+const parseBool = (value: string) => {
+  if (value === undefined) {
+    return true;
+  }
+
+  const normalized = value.toString().toLowerCase();
+
+  return !['false', '0', 'no'].includes(normalized);
+};
+
 program
   .command('batch')
   .description(
     'Gitzen uses AI to automatically analyze your unstaged changes, group them into logical blocks (e.g., new features, refactors, dependency updates), assign them a priority, and generate a separate commit for each group in order of importance.'
   )
-  .action(() => {
-    batchCommit();
+  .option('-i, --ignore [value]', 'Ignore gitzen.config.json', parseBool, false)
+  .action(opts => {
+    const { ignore } = opts;
+    batchCommit(ignore);
   });
 
 program

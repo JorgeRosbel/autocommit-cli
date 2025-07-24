@@ -20,11 +20,13 @@ const prompt_config = (
   template: TCommitTemplate,
   size: TSize,
   diff: string,
-  status: string
+  status: string,
+  ignore: boolean | undefined
 ) => {
   const requiresBody = ['angular', 'conventional'].includes(template);
 
   const prompt = `
+  ${ignore && 'IGNORE SIEMPRE LOS CAMBIOS DEL ARCHIVO LLAMADO: gitzen.config.json'}
   You are an expert in writing well-formatted git commit messages.
 
   git status: ${status}
@@ -186,12 +188,12 @@ async function runSequential(payload: TPayload) {
   }
 }
 
-export const batchCommit = async () => {
+export const batchCommit = async (ignore: boolean | undefined) => {
   try {
     const diff = await gitWorkingDiff();
     const status = await gitStatus();
     const { provider, model, language, template, size } = getGitzenConfig();
-    const { system_prompt, prompt } = prompt_config(language, template, size, diff, status);
+    const { system_prompt, prompt } = prompt_config(language, template, size, diff, status, ignore);
 
     const response = await StructuredResponse({ provider, model, system_prompt, prompt });
     const res = buildBatchAnalysisOutputDetailed(response);

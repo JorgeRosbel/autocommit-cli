@@ -30,9 +30,10 @@ program
   .command('commit')
   .description('Automatically generates and performs a commit using AI.')
   .option('-y, --yes [value]', 'Accept commits', parseBool, false)
+  .option('-e, --edit [value]', 'Opent git editor', parseBool, false)
   .action(opts => {
-    const { yes } = opts;
-    commit(yes);
+    const { yes, edit } = opts;
+    commit(yes, edit);
   });
 
 program

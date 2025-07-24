@@ -7,7 +7,6 @@ import { customHelp, HelpText } from './commands/gitzen_';
 import { review } from '@/commands/review';
 import { notify } from '@/utils/notify';
 import { updateCommand } from '@/commands/update';
-import { parseBool } from '@/utils/paresers';
 
 notify();
 
@@ -29,8 +28,8 @@ program
 program
   .command('commit')
   .description('Automatically generates and performs a commit using AI.')
-  .option('-y, --yes [value]', 'Accept commits', parseBool, false)
-  .option('-e, --edit [value]', 'Opent git editor', parseBool, false)
+  .option('-y, --yes', 'Accept commits', false)
+  .option('-e, --edit', 'Opent git editor', false)
   .action(opts => {
     const { yes, edit } = opts;
     commit(yes, edit);
@@ -52,7 +51,7 @@ program
   .description(
     'Gitzen uses AI to automatically analyze your unstaged changes, group them into logical blocks (e.g., new features, refactors, dependency updates), assign them a priority, and generate a separate commit for each group in order of importance.'
   )
-  .option('-i, --ignore [value]', 'Ignore gitzen.config.json', parseBool, false)
+  .option('-i, --ignore', 'Ignore gitzen.config.json', false)
   .action(opts => {
     const { ignore } = opts;
     batchCommit(ignore);

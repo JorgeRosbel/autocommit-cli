@@ -68,11 +68,16 @@ export const commit = async (autoAccept: boolean | undefined, edit: boolean | un
 
     console.log(boxen(chalk.cyan(response), { padding: 1 }));
 
-    if (response && !autoAccept) {
+    if (response && !autoAccept && !edit) {
       await execCommit(response, edit);
     }
 
-    if (response && autoAccept) {
+    if (response && autoAccept && !edit) {
+      const r = await gitCommitAsync(response, edit);
+      console.log(chalk.green(r));
+    }
+
+    if (response && edit) {
       const r = await gitCommitAsync(response, edit);
       console.log(chalk.green(r));
     }

@@ -30,7 +30,7 @@ export const gitCommitAsync = (
       if (stderr) {
         console.warn(stderr);
       }
-      resolve(`✔ Commit "${message}" created successfully.`);
+      resolve(`✔ Commit created successfully.`);
     });
   });
 };

@@ -2,26 +2,35 @@
 
 ### 📌 Description
 
-**Command:** `gitzen commit` (use `-y` to *auto-accept* the commits suggested by the AI)
+**Command:** `gitzen commit`
 
-Generates a commit message using the configured AI model and creates a Git commit **only after user confirmation**. Gitzen analyzes your **staged changes** and generates a clear, concise message based on your configuration settings.
+This command uses AI to generate a commit message based on your **staged changes**, following your configured settings. Gitzen helps you create clear, meaningful commit messages while keeping your workflow efficient.
 
-### ⚙️ How it Works
+By default, the AI-suggested commit message is shown to the user for confirmation before proceeding.
 
-1. You stage the changes with `git add ...`.
-2. You run `gitzen commit`.
-3. Gitzen:
+### ⚙️ Options
 
-   * Reads the staged diff.
-   * Uses your selected AI model to generate a commit message.
-   * Shows you the proposed commit for approval.
-   * Only if you confirm, it runs `git commit -m "<message>"`.
+* `-y`, `--yes`: ✅ Automatically accept and apply the generated commit message without asking for confirmation.
+* `-e`, `--edit`: ✏️ Opens the generated commit message in your default Git editor so you can edit it before committing.
 
-### 🧪 Workflow Example
+> ⚠️ These options are **mutually exclusive** and cannot be used together.
 
-```ts
-git add .
-gitzen commit
+### 📋 Requirements
+
+* ✅ Staged files are required for this command to work.
+
+### ✅ Examples
+
+```bash
+# Show suggested message and wait for confirmation
+$ git add .
+$ gitzen commit
+
+# Commit instantly with the AI-generated message
+$ gitzen commit -y
+
+# Edit the message in Git editor before committing
+$ gitzen commit -e
 ```
 
-This command helps you keep your Git history clear, consistent, and AI-enhanced without manual message crafting.
+Gitzen ensures your commit history stays clean and informative with minimal effort.

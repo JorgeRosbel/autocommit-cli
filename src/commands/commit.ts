@@ -8,7 +8,7 @@ import { gitStaging } from '../utils/gitStaging';
 import { getGitzenConfig } from '../utils/getGitzenConfig';
 import { PlaninResponse } from '../utils/PlainResponse';
 
-const execCommit = async (message: string) => {
+const execCommit = async (message: string, edit: undefined | boolean) => {
   const response = await inquirer.prompt([
     {
       type: 'confirm',
@@ -19,7 +19,7 @@ const execCommit = async (message: string) => {
   ]);
 
   if (response.git_commit) {
-    const r = await gitCommitAsync(message);
+    const r = await gitCommitAsync(message, edit);
     console.log(chalk.green(r));
   }
 };
@@ -53,7 +53,7 @@ const pompt_config = (language: TLang, template: TCommitTemplate, size: TSize, d
   return { prompt, system_prompt };
 };
 
-export const commit = async (autoAccept: boolean | undefined) => {
+export const commit = async (autoAccept: boolean | undefined, edit: boolean | undefined) => {
   try {
     const { template, model, size, language, provider } = getGitzenConfig();
     const diff = await gitStaging();
@@ -68,12 +68,17 @@ export const commit = async (autoAccept: boolean | undefined) => {
 
     console.log(boxen(chalk.cyan(response), { padding: 1 }));
 
-    if (response && !autoAccept) {
-      await execCommit(response);
+    if (response && !autoAccept && !edit) {
+      await execCommit(response, edit);
     }
 
-    if (response && autoAccept) {
-      const r = await gitCommitAsync(response);
+    if (response && autoAccept && !edit) {
+      const r = await gitCommitAsync(response, edit);
+      console.log(chalk.green(r));
+    }
+
+    if (response && edit) {
+      const r = await gitCommitAsync(response, edit);
       console.log(chalk.green(r));
     }
   } catch (error) {

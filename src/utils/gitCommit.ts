@@ -12,24 +12,13 @@ export const gitCommit = (message: string) => {
   });
 };
 
-// export const gitCommitAsync = (message: string): Promise<string> => {
-//   return new Promise((resolve, reject) => {
-//     execFile('git', ['commit', '-m', message], (error, _, stderr) => {
-//       if (error) {
-//         return reject(new Error(`❌ Error ejecutando git commit: ${error.message}`));
-//       }
-//       if (stderr) {
-//         console.warn(stderr);
-//       }
-//       resolve(`✔  Commit "${message}" created successfully.`);
-//     });
-//   });
-// };
-
-export const gitCommitAsync = (message: string): Promise<string> => {
-  // escapamos posibles comillas dobles en el mensaje
+export const gitCommitAsync = (
+  message: string,
+  edit: undefined | boolean = false
+): Promise<string> => {
   const safeMessage = message.replace(/"/g, '\\"');
-  const cmd = `git commit -m "${safeMessage}"`;
+  //const cmd = `git commit -m "${safeMessage}"`;
+  const cmd = `git commit ${edit ? '-e ' : ''}-m "${safeMessage}"`;
 
   return new Promise((resolve, reject) => {
     exec(cmd, (error, _, stderr) => {
@@ -41,7 +30,7 @@ export const gitCommitAsync = (message: string): Promise<string> => {
       if (stderr) {
         console.warn(stderr);
       }
-      resolve(`✔ Commit "${message}" created successfully.`);
+      resolve(`✔ Commit created successfully.`);
     });
   });
 };

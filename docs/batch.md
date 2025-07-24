@@ -2,7 +2,7 @@
 
 ### 📌 Description
 
-**Command:** `gitzen batch`
+**Command:** `gitzen batch` (Use -i to ignore `gitzen.config.json` if needed)
 
 Use this command when you've made many unrelated changes and want to split them into multiple meaningful commits for better understanding and project clarity.
 

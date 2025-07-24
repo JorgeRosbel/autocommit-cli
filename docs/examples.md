@@ -87,6 +87,12 @@ It will:
 Upon approval, Gitzen stages and commits the files for you.
 *A screenshot would illustrate the grouping process.*
 
+Suppose you are making a contribution to a project that doesn't use Gitzen and you don't want to include the creation of `gitzen.config.json` in the batch. To ignore it , you should use:
+
+```sh
+gitzen batch -i
+```
+
 ![batch](batch.png)
 
 ---

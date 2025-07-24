@@ -53,7 +53,7 @@ const pompt_config = (language: TLang, template: TCommitTemplate, size: TSize, d
   return { prompt, system_prompt };
 };
 
-export const commit = async () => {
+export const commit = async (autoAccept: boolean | undefined) => {
   try {
     const { template, model, size, language, provider } = getGitzenConfig();
     const diff = await gitStaging();
@@ -68,8 +68,13 @@ export const commit = async () => {
 
     console.log(boxen(chalk.cyan(response), { padding: 1 }));
 
-    if (response) {
+    if (response && !autoAccept) {
       await execCommit(response);
+    }
+
+    if (response && autoAccept) {
+      const r = await gitCommitAsync(response);
+      console.log(chalk.green(r));
     }
   } catch (error) {
     console.log(error);

@@ -7,6 +7,7 @@ import { customHelp, HelpText } from './commands/gitzen_';
 import { review } from '@/commands/review';
 import { notify } from '@/utils/notify';
 import { updateCommand } from '@/commands/update';
+import { parseBool } from '@/utils/paresers';
 
 notify();
 
@@ -28,8 +29,10 @@ program
 program
   .command('commit')
   .description('Automatically generates and performs a commit using AI.')
-  .action(() => {
-    commit();
+  .option('-y, --yes [value]', 'Accept commits', parseBool, false)
+  .action(opts => {
+    const { yes } = opts;
+    commit(yes);
   });
 
 program
@@ -42,16 +45,6 @@ program
     const { lang } = opts;
     summarize(lang);
   });
-
-const parseBool = (value: string) => {
-  if (value === undefined) {
-    return true;
-  }
-
-  const normalized = value.toString().toLowerCase();
-
-  return !['false', '0', 'no'].includes(normalized);
-};
 
 program
   .command('batch')

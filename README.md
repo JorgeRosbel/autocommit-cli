@@ -51,13 +51,14 @@ Once installed globally, the `gitzen` command will be available anywhere in your
 
 ## 🧾 Gitzen Command Summary
 
-| Command            | Description                                            | Notes                                                        | Requires Staging |
-| ------------------ | ------------------------------------------------------ | ------------------------------------------------------------ | ---------------- |
-| `gitzen start`     | 🚀 Initialize Gitzen setup and config                  | Run once to configure the CLI                                | ❌                |
-| `gitzen commit`    | 💾 Generate commit message with AI from staged changes | Requires staged files. Optional: `-y` to auto-accept commits | ✅                |
-| `gitzen summarize` | 🧠 Summarize changes in staging/working dir            | Optional: `-l <language>`                                    | ❌                |
-| `gitzen batch`     | 📂 Group unstaged changes and commit in logical order  | Optional: `-i` to ignore `gitzen.config.json` if needed      | ❌                |
-| `gitzen review`    | 🔍 Gives you a review of the code in the staging area  | Requires staged files. Optional: `-l <language>`             | ✅                |
-| `gitzen update`    | 🔄 Checks for and updates the CLI if available         | Keep Gitzen up to date easily                                | ❌                |
+| Command            | Description                                            | Notes                                                              | Requires Staging |
+| ------------------ | ------------------------------------------------------ | ------------------------------------------------------------------ | ---------------- |
+| `gitzen start`     | 🚀 Initialize Gitzen setup and config                  | Run once to configure the CLI                                      | ❌                |
+| `gitzen commit`    | 💾 Generate commit message with AI from staged changes | Requires staged files. Optional: `-y` to auto-accept, `-e` to edit | ✅                |
+| `gitzen summarize` | 🧠 Summarize changes in staging/working dir            | Optional: `-l <language>`                                          | ❌                |
+| `gitzen batch`     | 📂 Group unstaged changes and commit in logical order  | Optional: `-i` to ignore `gitzen.config.json`                      | ❌                |
+| `gitzen review`    | 🔍 Gives you a review of the code in the staging area  | Requires staged files. Optional: `-l <language>`                   | ✅                |
+| `gitzen update`    | 🔄 Checks for and updates the CLI if available         | Keep Gitzen up to date easily                                      | ❌                |
+
 
 

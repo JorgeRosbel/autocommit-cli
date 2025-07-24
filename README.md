@@ -60,5 +60,5 @@ Once installed globally, the `gitzen` command will be available anywhere in your
 | `gitzen review`    | 🔍 Gives you a review of the code in the staging area  | Requires staged files. Optional: `-l <language>`                   | ✅                |
 
 
-
-
+Love **Gitzen**? Support the project by buying me a coffee! ☕️  
+[![Ko‑fi](https://img.shields.io/badge/☕️-Buy_me_a_coffee-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/jorgerosbel)

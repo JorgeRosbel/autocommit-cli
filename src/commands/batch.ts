@@ -206,7 +206,6 @@ export const batchCommit = async (ignore: boolean | undefined) => {
     response.groups.forEach((group, index) => {
       const paths = group.files.map(v => v.path).join(' ');
       const commit_msg = response.suggestedCommits[index].message;
-      // const info = `git add ${paths}\ngit commit -m "${commit_msg}"\n\n`;
       const info = `${chalk.yellow('git add ')}${paths}\n${chalk.yellow('git commit -m ')}"${commit_msg}"${index !== response.groups.length - 1 ? '\n\n' : ''}`;
       payload.push({ commit: commit_msg, files: paths });
 

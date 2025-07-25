@@ -62,3 +62,49 @@ Once installed globally, the `gitzen` command will be available anywhere in your
 
 Love **Gitzen**? Support the project by buying me a coffee! ☕️  
 [![Ko‑fi](https://img.shields.io/badge/☕️-Buy_me_a_coffee-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/jorgerosbel)
+
+
+## 📁 Project Structure
+
+The following is the folder and file structure of the project:
+
+```txt
+gitzen/
+├── __tests__/
+│   ├── commitFlow.test.ts
+│   └── summarizerFlow.test.ts
+│
+├── .github/
+│   └── workflows/
+│       ├── lint_format.yaml
+│       ├── publish.yaml
+│       └── test.yaml
+│
+├── .husky/
+├── dist/
+├── docs/
+├── node_modules/
+│
+├── src/
+│   ├── commands/
+│   ├── providers/
+│   ├── templates/
+│   ├── utils/
+│   └── index.ts
+│
+├── types.d.ts
+├── .gitignore
+├── .npmignore
+├── .npmrc
+├── .prettierignore
+├── .eslintrc.json
+├── gitzen.config.json
+├── LICENSE
+├── package.json
+├── package-lock.json
+├── prettier.config.mjs
+├── README.md
+├── tsconfig.json
+├── tsup.config.ts
+└── vitest.config.ts
+```

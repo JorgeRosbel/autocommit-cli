@@ -120,6 +120,7 @@ Choose the AI model to use:
 'gpt-4.1'
 'gpt-4o-2024-08-06'
 'gpt-4o-mini'
+'gpt-4.1-nano-2025-04-14'
 'gpt-4'
 'gpt-3.5-turbo'
 'gemini-2.5-flash'

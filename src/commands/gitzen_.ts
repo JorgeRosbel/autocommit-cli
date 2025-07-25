@@ -13,7 +13,7 @@ const HelpText = `\n${gradientText}\n`;
 
 const customHelp = boxen(
   `
-🧠 ${chalk.bold('Gitzen')} — AI-powered CLI for smart git commits | ${chalk.green('v0.1.5')}
+🧠 ${chalk.bold('Gitzen')} — AI-powered CLI for smart git commits | ${chalk.green('v0.1.6')}
 
 ${chalk.bold('Commands:')}
 

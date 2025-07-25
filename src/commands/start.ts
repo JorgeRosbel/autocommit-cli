@@ -76,6 +76,10 @@ const initModel = async () => {
       value: 'gpt-4o-mini',
     },
     {
+      name: `${chalk.cyan('gpt-4.1-nano')} ${chalk.yellow('⚡')} - Faster and more affordable`,
+      value: 'gpt-4.1-nano-2025-04-14',
+    },
+    {
       name: `${chalk.magenta('gpt-4')} - More expensive but compatible`,
       value: 'gpt-4',
     },

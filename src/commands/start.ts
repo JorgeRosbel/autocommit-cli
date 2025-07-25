@@ -3,12 +3,12 @@ import inquirer from 'inquirer';
 import fs from 'fs';
 import { join } from 'path';
 import boxen from 'boxen';
-import { execFile } from 'node:child_process';
 import type { TCommitTemplate, TModel, TSize, TLang, TProviders } from '../types';
+import { gitInit } from '@/utils/gitInit';
 
 // npm run build && npm link && autocommit start
 
-const gitInit = async () => {
+const gitInitConfirm = async () => {
   const response = await inquirer.prompt([
     {
       type: 'confirm',
@@ -19,23 +19,9 @@ const gitInit = async () => {
   ]);
 
   if (response.git_init) {
-    gitInitScript();
+    const res = await gitInit();
+    console.log(chalk.green(res));
   }
-};
-
-const gitInitScript = () => {
-  const script = join(process.cwd(), '/src/utils/git_init.sh');
-
-  execFile('sh', [script], (error, _, stderr) => {
-    if (error) {
-      console.error('❌ Error executing script:', error.message);
-      process.exit(1);
-    }
-    if (stderr) {
-      console.error('⚠️ Script stderr:', stderr);
-      process.exit(1);
-    }
-  });
 };
 
 const gitCommitTemplate = async () => {
@@ -254,7 +240,7 @@ export const start = async () => {
 
     console.log(boxen(chalk.blue("Let's start the configuration process"), { padding: 1 }));
 
-    await gitInit();
+    await gitInitConfirm();
     const template = (await gitCommitTemplate()) as TCommitTemplate;
     const language = (await initLang()) as TLang;
     const model = (await initModel()) as TModel;

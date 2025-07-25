@@ -12,7 +12,14 @@ export const generateGo = async (
     baseURL: 'https://generativelanguage.googleapis.com/v1beta/openai/',
   });
 
-  const spinner = ora(chalk.blue('Generating...')).start();
+  const messages = [
+    chalk.blue(`Generating content using model: ${chalk.green(model)}...`),
+    chalk.blue(`Processing request with model: ${chalk.green(model)}...`),
+    chalk.blue(`Working on it using model ${chalk.green(model)}...`),
+    chalk.blue(`Initializing generation with model: ${chalk.green(model)}...`),
+  ];
+
+  const spinner = ora(chalk.green()).start(messages[((messages.length - 1) * Math.random()) | 0]);
 
   try {
     const response = await openai.chat.completions.create({

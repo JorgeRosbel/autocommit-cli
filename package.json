@@ -15,7 +15,12 @@
     "format": "prettier --write \"**/*.{js,ts}\"",
     "check": "prettier --check \"**/*.{js,ts}\"",
     "lint": "eslint .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:v": "vitest --reporter verbose"
   },
   "lint-staged": {
     "*.{js,ts}": [
@@ -53,6 +58,7 @@
     "@types/update-notifier": "^6.0.8",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
     "@typescript-eslint/parser": "^8.37.0",
+    "@vitest/ui": "^3.2.4",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
@@ -60,7 +66,8 @@
     "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "boxen": "^8.0.1",

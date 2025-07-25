@@ -1,9 +1,9 @@
 import boxen from 'boxen';
 import chalk from 'chalk';
 import { PlaninResponse } from '../utils/PlainResponse';
-import { gitAllChanges } from '../utils/gitAllChanges';
 import { getGitzenConfig } from '../utils/getGitzenConfig';
 import { TLang } from '../types';
+import { gitWorkingDiff } from '@/utils/gitWorking';
 
 const prompt_config = (lang: string | undefined, diff: string, language: TLang) => {
   const system_prompt = `You are a Senior Software Developer expert at analyzing git diffs and code changes`;
@@ -22,7 +22,7 @@ const prompt_config = (lang: string | undefined, diff: string, language: TLang) 
 export const summarize = async (lang: string | undefined) => {
   try {
     const { model, language, provider } = getGitzenConfig();
-    const diff = await gitAllChanges();
+    const diff = await gitWorkingDiff();
     const { prompt, system_prompt } = prompt_config(lang, diff, language);
 
     const response = await PlaninResponse({ provider, model, system_prompt, prompt });

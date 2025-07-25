@@ -198,21 +198,22 @@ export const batchCommit = async (ignore: boolean | undefined) => {
     const response = await StructuredResponse({ provider, model, system_prompt, prompt });
     const res = buildBatchAnalysisOutputDetailed(response);
 
-    console.log(boxen(chalk.yellow(res), { padding: 1 }));
+    console.log(boxen(chalk.hex('#8FBCBB')(res), { padding: 1, borderColor: 'cyanBright' }));
 
-    let question = `Do you want to perform the following actions?:\n\n`;
+    let question = chalk.cyanBright.bold(`Do you want to perform the following actions?:\n\n`);
     const payload: TPayload = [];
 
     response.groups.forEach((group, index) => {
       const paths = group.files.map(v => v.path).join(' ');
       const commit_msg = response.suggestedCommits[index].message;
-      const info = `git add ${paths}\ngit commit -m "${commit_msg}"\n\n`;
+      // const info = `git add ${paths}\ngit commit -m "${commit_msg}"\n\n`;
+      const info = `${chalk.yellow('git add ')}${paths}\n${chalk.yellow('git commit -m ')}"${commit_msg}"${index !== response.groups.length - 1 && '\n\n'}`;
       payload.push({ commit: commit_msg, files: paths });
 
       question += info;
     });
 
-    console.log(boxen(chalk.cyan(question), { padding: 1 }));
+    console.log(boxen(chalk.hex('#8FBCBB')(question), { padding: 1, borderColor: 'cyanBright' }));
 
     const confirm = await giBatchConfirm('Proceed?');
 

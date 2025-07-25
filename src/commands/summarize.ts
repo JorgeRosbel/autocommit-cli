@@ -27,7 +27,7 @@ export const summarize = async (lang: string | undefined) => {
 
     const response = await PlaninResponse({ provider, model, system_prompt, prompt });
 
-    console.log(boxen(chalk.yellow(response), { padding: 1 }));
+    console.log(boxen(chalk.hex('#8FBCBB')(response), { padding: 1 }));
   } catch (error) {
     console.log(error);
     process.exit(1);

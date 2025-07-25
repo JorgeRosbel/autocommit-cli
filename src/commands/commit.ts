@@ -66,7 +66,7 @@ export const commit = async (autoAccept: boolean | undefined, edit: boolean | un
 
     const response = await PlaninResponse({ provider, model, system_prompt, prompt });
 
-    console.log(boxen(chalk.cyan(response), { padding: 1 }));
+    console.log(boxen(chalk.cyan(response), { padding: 1, borderColor: 'cyan' }));
 
     if (response && !autoAccept && !edit) {
       await execCommit(response, edit);

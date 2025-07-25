@@ -5,7 +5,7 @@ import { exec } from 'child_process';
 
 export const gitWorkingDiff = (): Promise<string> => {
   const gitDiffCommand = `{
-  git diff HEAD --unified=0 | grep -E '^[+-][^+-]' || true
+  git diff --unified=0 | grep -E '^[+-][^+-]' || true
   git ls-files --others --exclude-standard | xargs -I {} sh -c 'echo "+++ {}"; sed "s/^/+/" "{}"'
   }`;
 

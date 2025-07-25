@@ -1,6 +1,6 @@
 {
   "name": "gitzen",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "🧠 AI-powered CLI tool for automatic git commit message generation",
   "main": "dist/index.mjs",
   "types": "dist/index.d.ts",

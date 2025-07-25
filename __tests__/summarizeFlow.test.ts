@@ -2,11 +2,11 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { summarize } from '../src/commands/summarize';
 import { PlaninResponse } from '../src/utils/PlainResponse';
 import { getGitzenConfig } from '../src/utils/getGitzenConfig';
-import { gitAllChanges } from '../src/utils/gitAllChanges';
-import boxen from 'boxen';
+import { gitWorkingDiff } from '../src/utils/gitWorking';
+
 import chalk from 'chalk';
 
-vi.mock('../src/utils/gitAllChanges');
+vi.mock('../src/utils/gitWorking');
 vi.mock('../src/utils/getGitzenConfig');
 vi.mock('../src/utils/PlainResponse');
 vi.mock('boxen', () => ({
@@ -14,15 +14,21 @@ vi.mock('boxen', () => ({
   default: vi.fn((text: string) => text),
 }));
 
-vi.mock('chalk', () => ({
-  __esModule: true,
-  default: {
-    cyan: vi.fn((text: string) => text),
-    green: vi.fn((text: string) => text),
-    red: vi.fn((text: string) => text),
-    yellow: vi.fn((text: string) => text), // si lo usas en summarize
-  },
-}));
+export const fakeFormatter = vi.fn((txt: string) => txt);
+
+vi.mock('chalk', () => {
+  return {
+    __esModule: true,
+    default: {
+      cyan: vi.fn((txt: string) => txt),
+      green: vi.fn((txt: string) => txt),
+      yellow: vi.fn((txt: string) => txt),
+      red: vi.fn((txt: string) => txt),
+
+      hex: vi.fn(() => fakeFormatter),
+    },
+  };
+});
 
 const processExitSpy = vi.spyOn(process, 'exit').mockImplementation(() => {
   throw new Error('process.exit called');
@@ -51,7 +57,7 @@ describe('summarize command', () => {
 
     // Hacemos que gitAllChanges rechace con un error
     const gitError = new Error('Git failure');
-    vi.mocked(gitAllChanges).mockRejectedValue(gitError);
+    vi.mocked(gitWorkingDiff).mockRejectedValue(gitError);
 
     // Act & Assert: como process.exit está espiado para lanzar, usamos rejects.toThrow
     await expect(summarize(undefined)).rejects.toThrow('process.exit called');
@@ -72,19 +78,20 @@ describe('summarize command', () => {
       language: 'en',
       provider: 'openai',
     });
-    vi.mocked(gitAllChanges).mockResolvedValue(mockDiff);
+    vi.mocked(gitWorkingDiff).mockResolvedValue(mockDiff);
     vi.mocked(PlaninResponse).mockResolvedValue(mockResponse);
 
     await summarize(undefined);
 
     expect(getGitzenConfig).toBeCalled();
-    expect(gitAllChanges).toBeCalled();
+    expect(gitWorkingDiff).toBeCalled();
 
     expect(PlaninResponse).toBeCalled();
 
     expect(PlaninResponse).toHaveResolvedWith(mockResponse);
 
-    expect(chalk.yellow).toHaveBeenCalledWith(mockResponse);
-    expect(boxen).toHaveBeenCalledWith(mockResponse, { padding: 1 });
+    expect(chalk.hex).toHaveBeenCalledWith('#8FBCBB');
+    // Y que el formatter recibió el texto
+    expect(fakeFormatter).toHaveBeenCalledWith(mockResponse);
   });
 });
